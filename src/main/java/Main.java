@@ -15,23 +15,23 @@ public class Main {
     while(true) {
         System.out.println("A scary white walker is attacking you");
         while (true) {
-            System.out.println("Do you want to attack (enter) or skidaddle (q)");
+            System.out.println("%n Do you want to attack (enter) or skidaddle (q)");
             String userInput = scanner.nextLine();
             if (userInput.equals("q")) {
                 System.out.println("You descided to run away, do");
                 break;
             }
             // Spelaren attackerar npcn och kollar om npcn dör
-            System.out.println(player.getName() + " hits white walker for " + player.attack(npc) + " HP. White walker has " + npc.getHealth() + " Hp left.");
+            System.out.printf("%s hits white walker for %d HP. White walker has %d Hp left. %n",player.getName(), player.attack(npc), npc.getHealth());
             if (npc.getHealth() <= 0) {
                 System.out.println("White walker is dead.");
-                System.out.println("Player wins with " + player.getHealth() + "HP left");
+                System.out.printf("Player wins with %d HP left ", player.getHealth());
                 break;
             }
             // npcn attackerar spelaren och kollar om spelaren dör
-            System.out.println("White walker hits " +player.getName() + " for " + npc.attack(player) + " HP. Player has " + player.getHealth() + " HP left.");
+            System.out.printf("White walker hits %s for %d HP. %s has %d HP left %n", player.getName(),npc.attack(player),player.getName(), player.getHealth());
             if (player.getHealth() <= 0) {
-                System.out.println("Player is dead, White walker wins with " + npc.getHealth() + " HP left");
+                System.out.printf("Player is dead, White walker wins with %d HP left", npc.getHealth());
                 System.out.println("Game over, thanks for playing");
                 break;
             }
