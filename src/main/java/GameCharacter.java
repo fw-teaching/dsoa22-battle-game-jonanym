@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 abstract class GameCharacter {
@@ -7,6 +8,8 @@ abstract class GameCharacter {
     public int health; // Instansvariabel för hälsa
     public Weapon weapon;
     public double finesse;
+    private ArrayList<Weapon> inventory = new ArrayList<Weapon>();
+    public ArrayList<Weapon> getInventory() {return inventory;}
 
     void takeDamage(int damage){
          health = health - damage;
@@ -26,17 +29,18 @@ abstract class GameCharacter {
     public GameCharacter(String name, int health) {
         this.name = name;
         this.health = health;
+
+        inventory.add(new Weapon("Axe",25));
+        inventory.add(new Weapon("Shwovel",15));
+
     }
 
     public int getHealth() {
         return health;
     }
 
-    public void setHealth(int health){
-        this.health = health;
-    }
-
     public String getName(){
         return name;
     }
+
 }

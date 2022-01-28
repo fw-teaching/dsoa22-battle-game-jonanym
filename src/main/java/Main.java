@@ -10,28 +10,36 @@ public class Main {
         String playerName = scanner.nextLine();
 
         GameCharacter player = new Player(playerName, 100);
-        GameCharacter npc = new Npc("Ghoul", 80);
+        GameCharacter npc = Npc.spawnNpc();
+
 
     while(true) {
-        System.out.println("A scary white walker is attacking you");
+
+        System.out.println("A scary " + npc.getName() + " is attacking you");
         while (true) {
-            System.out.println("%n Do you want to attack (enter) or skidaddle (q)");
+            System.out.println("------ Inventory ------");
+            for(int i = 0; i < player.getInventory().size(); i++){
+                System.out.printf("%d - %s \n",i, player.getInventory().get(i).getName());
+            }
+            System.out.println("Chose weapon for attack (enter) or skidaddle (q)");
             String userInput = scanner.nextLine();
+
             if (userInput.equals("q")) {
                 System.out.println("You descided to run away, do");
                 break;
             }
+            player.weapon = player.getInventory().get(Integer.parseInt(userInput));
             // Spelaren attackerar npcn och kollar om npcn dör
-            System.out.printf("%s hits white walker for %d HP. White walker has %d Hp left. %n",player.getName(), player.attack(npc), npc.getHealth());
+            System.out.printf(" -> %s hits %s with a %s for %d HP. %s has %d Hp left. %n",player.getName(), npc.getName(),player.weapon.getName(), player.attack(npc),npc.getName(), npc.getHealth());
             if (npc.getHealth() <= 0) {
-                System.out.println("White walker is dead.");
-                System.out.printf("Player wins with %d HP left ", player.getHealth());
+                System.out.printf("%s is dead.",npc.getName());
+                System.out.printf("\n%s wins with %d HP left ", player.getName(),player.getHealth());
                 break;
             }
             // npcn attackerar spelaren och kollar om spelaren dör
-            System.out.printf("White walker hits %s for %d HP. %s has %d HP left %n", player.getName(),npc.attack(player),player.getName(), player.getHealth());
+            System.out.printf("%s hits %s with a %s for %d HP. %s has %d HP left \n", npc.getName(), player.getName(), npc.weapon.getName(),npc.attack(player),player.getName(), player.getHealth());
             if (player.getHealth() <= 0) {
-                System.out.printf("Player is dead, White walker wins with %d HP left", npc.getHealth());
+                System.out.printf("%s is dead, %s wins with %d HP left", player.getName(),npc.getName(),npc.getHealth());
                 System.out.println("Game over, thanks for playing");
                 break;
             }
@@ -45,8 +53,8 @@ public class Main {
         if(userInput.equals("q")){
             break;
         }
-        // om man väljer att spela igen, sätter vi npcns health tillbaka till 80;
-        npc.setHealth(80);
+        // om man väljer att spela igen, spawna en ny npc
+        npc = Npc.spawnNpc();
     }
     }
 

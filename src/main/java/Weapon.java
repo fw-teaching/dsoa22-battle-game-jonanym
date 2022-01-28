@@ -6,4 +6,8 @@ public class Weapon {
         this.name = name;
         this.damage = damage;
     }
+
+    public String getName() {
+        return name;
+    }
 }
