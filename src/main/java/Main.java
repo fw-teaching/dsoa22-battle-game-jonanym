@@ -4,16 +4,17 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
-        GameCharacter player = (GameCharacter) FileUtils.loadGame("game.save");
-
+        GameCharacter player;
         System.out.println("Continue saved Game (enter) or start new game (n)");
 
         String userInput = scanner.nextLine();
         if(userInput.equals("n")){
             System.out.println("What is your name");
             String playerName = scanner.nextLine();
-            player = new Player(playerName, 100);
+             player = new Player(playerName, 100);
+        }
+        else{
+             player = (GameCharacter) FileUtils.loadGame("game.save");
         }
 
         System.out.printf("Player %s has %d HP \n\n", player.getName(), player.getHealth());
@@ -23,8 +24,8 @@ public class Main {
         System.out.println("A scary " + npc.getName() + " is attacking you");
         while (true) {
             System.out.println("\n------ Inventory ------");
-            for(int i = 0; i < player.getInventory().size(); i++){
-                System.out.printf("%d - %s \n",i, player.getInventory().get(i).getName());
+            for(int i = 0; i < player.getInventory().size()-1; i++){
+                System.out.printf("%d - %s \n",i+1, player.getInventory().get(i).getName());
             }
             System.out.println("\nChose weapon for attack (enter) or skidaddle (q)");
 
@@ -35,7 +36,7 @@ public class Main {
                         System.out.println("You decided to run away!");
                         break;
                     }
-                    player.weapon = player.getInventory().get(Integer.parseInt(userInput));
+                    player.weapon = player.getInventory().get(Integer.parseInt(userInput)-1);
                     break;
                 } catch (Exception e) {
                     System.out.printf("Choose weapon (0-%d) or skidaddle (q)\n", player.getInventory().size());
@@ -57,6 +58,8 @@ public class Main {
                     player.addWeapon(npc.weapon);
                     System.out.printf("%s added to inventory", npc.weapon.getName());
                 }
+                player.health = Player.heal(player.getHealth());
+                System.out.printf("You find a magic potion that restores your health to %d", player.getHealth());
 
                 break;
             }

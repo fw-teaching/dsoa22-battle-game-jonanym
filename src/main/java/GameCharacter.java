@@ -3,13 +3,12 @@ import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 abstract class GameCharacter implements Serializable {
-    ThreadLocalRandom tlr = ThreadLocalRandom.current();
 
     private final String name; // Instansvariabel för namn
     public int health; // Instansvariabel för hälsa
     public Weapon weapon;
     public double finesse;
-    private final ArrayList<Weapon> inventory = new ArrayList<Weapon>();
+    private final ArrayList<Weapon> inventory = new ArrayList<>();
     public ArrayList<Weapon> getInventory() {return inventory;}
 
     void takeDamage(int damage){
@@ -44,9 +43,7 @@ abstract class GameCharacter implements Serializable {
         return name;
     }
 
-    public Weapon getWeapon(){
-        return weapon;
-    }
     public void addWeapon(Weapon weapon){inventory.add(weapon);}
+
 
 }
