@@ -1,5 +1,7 @@
-public class Weapon {
-    private String name;
+import java.io.Serializable;
+
+public class Weapon implements Serializable {
+    private final String name;
     int damage;
 
     public Weapon(String name, int damage) {
@@ -10,4 +12,5 @@ public class Weapon {
     public String getName() {
         return name;
     }
+
 }

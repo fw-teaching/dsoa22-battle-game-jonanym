@@ -1,3 +1,7 @@
+# savefiles
+*.save
+*.txt
+
 # Compiled class file
 *.class
 

@@ -1,10 +1,9 @@
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Npc extends GameCharacter{
     int randomDamage = (int)((Math.random() * (20 - 10)) + 10);
     Random random = new Random();
-    String[] weaponNames = {"Sword", "Axe","Knife","Showel","Fists"};
+    String[] weaponNames = {"Sword", "Axe","Knife","Showel","HulkFists"};
     int randomIndex = random.nextInt(weaponNames.length);
     String randomWeapon = weaponNames[randomIndex];
 
